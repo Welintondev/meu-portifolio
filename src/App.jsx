@@ -23,35 +23,34 @@ const App = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Lista de Projetos atualizada
   const projects = [
     {
       title: "Meu Portfólio",
-      description: "Site pessoal para apresentar meus projetos, habilidades e experiências como desenvolvedor, com design moderno e responsivo.",
-      tech: ["React", "Vite", "Tailwind CSS", "JavaScript", "Lucide React"],
+      description: "Site pessoal para apresentar os meus projetos, competências e experiências como programador.",
+      tech: ["React", "Vite", "Tailwind CSS"],
       link: "https://landingpage-odonto.vercel.app/",
-      image: "/img/meu_portifolio.png"
+      image: "./img/meu_portifolio.png"
     },
     {
       title: "Gestão Escolar",
-      description: "Sistema de gestão escolar completo com funcionalidades para gerenciamento de alunos, professores e disciplinas.",
+      description: "Sistema de gestão escolar completo para administração de alunos e professores.",
       tech: ["HTML", "CSS", "JavaScript", "MySQL"],
       link: "https://github.com/Welintondev/gestao-escolar.git",
-      image: "/img/gestao_escolar.png"
+      image: "./img/gestao_escolar.png"
     },
     {
       title: "Smile Odonto",
-      description: "Landing page para clínica odontológica com design moderno e responsivo, focada em conversão de clientes.",
-      tech: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
+      description: "Landing page para clínica dentária com design moderno e foco em conversão.",
+      tech: ["HTML5", "CSS3", "Tailwind CSS"],
       link: "https://landingpage-odonto.vercel.app/",
-      image: "/img/smile_odonto.png"
+      image: "./img/smile_odonto.png"
     },
     {
       title: "Minhas Finanças",
-      description: "Aplicação web para controle financeiro pessoal, permitindo cadastro de receitas, despesas e visualização de gráficos financeiros.",
+      description: "Aplicação web para controlo financeiro pessoal e visualização de gráficos.",
       tech: ["HTML5", "Tailwind CSS", "JavaScript"],
       link: "https://minhas-financas-khaki.vercel.app/",
-      image: "/img/minhas_financas.png"
+      image: "./img/minhas_financas.png"
     }
   ];
 
@@ -76,7 +75,7 @@ const App = () => {
     {
       title: "Ferramentas",
       icon: <Layers className="w-6 h-6 text-purple-500" />,
-      skills: ["VS Code", "GitHub", "Figma", "Windows"]
+      skills: ["VS Code", "GitHub", "Figma", "Vite"]
     }
   ];
 
@@ -100,14 +99,13 @@ const App = () => {
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDarkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
       
-      {/* Navbar Responsiva */}
+      {/* Navbar */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? (isDarkMode ? 'bg-slate-950/90 border-b border-slate-800 backdrop-blur-md py-3' : 'bg-white/90 shadow-md backdrop-blur-md py-3') 
+          ? (isDarkMode ? 'bg-slate-950/90 border-b border-slate-800 backdrop-blur-md' : 'bg-white/90 shadow-md backdrop-blur-md') 
           : 'bg-transparent py-5'
       }`}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          {/* Logo */}
+        <div className="container mx-auto px-6 flex justify-between items-center h-16">
           <div className="flex items-center gap-2 cursor-pointer group" onClick={() => scrollToSection('home')}>
             <div className="bg-blue-600 p-1.5 rounded-lg group-hover:rotate-12 transition-transform">
               <Terminal className="text-white w-5 h-5" />
@@ -115,7 +113,7 @@ const App = () => {
             <span className="font-bold text-xl tracking-tight">Welinton<span className="text-blue-600">.dev</span></span>
           </div>
 
-          {/* Menu Desktop */}
+          {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             {['home', 'skills', 'projects', 'contact'].map((id) => (
               <button 
@@ -125,133 +123,88 @@ const App = () => {
                   activeTab === id ? 'text-blue-600' : (isDarkMode ? 'text-slate-400' : 'text-slate-600')
                 }`}
               >
-                {id === 'home' ? 'Início' : id === 'skills' ? 'Habilidades' : id === 'projects' ? 'Projetos' : 'Contato'}
+                {id === 'home' ? 'Início' : id === 'skills' ? 'Habilidades' : id === 'projects' ? 'Projetos' : 'Contacto'}
                 <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full ${activeTab === id ? 'w-full' : ''}`}></span>
               </button>
             ))}
-            
-            <div className="flex items-center gap-4 ml-4 pl-4 border-l border-slate-700/20">
-              <button 
-                onClick={toggleTheme} 
-                className={`p-2.5 rounded-xl transition-all ${isDarkMode ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
-                aria-label="Trocar tema"
-              >
-                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-            </div>
-          </div>
-
-          {/* Botão Mobile */}
-          <div className="flex items-center gap-4 md:hidden">
             <button 
               onClick={toggleTheme} 
-              className={`p-2 rounded-lg ${isDarkMode ? 'text-yellow-400' : 'text-slate-600'}`}
+              className={`p-2.5 rounded-xl transition-all ${isDarkMode ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+              aria-label="Toggle Theme"
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+          </div>
+
+          {/* Mobile Navigation Controls */}
+          <div className="flex md:hidden items-center gap-4">
             <button 
-              className={`p-2 rounded-lg ${isDarkMode ? 'text-white' : 'text-slate-900'}`} 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={toggleTheme} 
+              className={`p-2 rounded-xl transition-all ${isDarkMode ? 'bg-slate-800 text-yellow-400' : 'bg-slate-100 text-slate-600'}`}
             >
+              {isDarkMode ? <Sun size={22} /> : <Moon size={22} />}
+            </button>
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-1">
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
-        {/* Menu Mobile Dropdown */}
-        <div className={`absolute top-full left-0 w-full overflow-hidden transition-all duration-300 md:hidden ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        } ${isDarkMode ? 'bg-slate-900 border-b border-slate-800' : 'bg-white shadow-xl border-b border-slate-100'}`}>
-          <div className="flex flex-col p-6 gap-4">
+        {/* Mobile Menu Overlay */}
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'} ${isDarkMode ? 'bg-slate-900 border-b border-slate-800' : 'bg-white border-b border-slate-200'}`}>
+           <div className="flex flex-col p-6 gap-6">
             {['home', 'skills', 'projects', 'contact'].map((id) => (
               <button 
                 key={id} 
                 onClick={() => scrollToSection(id)} 
-                className={`text-left text-lg font-bold py-2 ${
-                  activeTab === id ? 'text-blue-600' : (isDarkMode ? 'text-slate-300' : 'text-slate-700')
-                }`}
+                className={`text-left font-bold text-lg transition-colors ${activeTab === id ? 'text-blue-600' : (isDarkMode ? 'text-slate-300' : 'text-slate-600')}`}
               >
-                {id === 'home' ? 'Início' : id === 'skills' ? 'Habilidades' : id === 'projects' ? 'Projetos' : 'Contato'}
+                {id === 'home' ? 'Início' : id === 'skills' ? 'Habilidades' : id === 'projects' ? 'Projetos' : 'Contacto'}
               </button>
             ))}
-          </div>
+           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="relative pt-44 pb-24 px-6 overflow-hidden">
-        {/* Elementos Decorativos de Fundo */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-600 rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-10 right-10 w-72 h-72 bg-emerald-600 rounded-full blur-[120px]"></div>
-        </div>
-
+      {/* Hero */}
+      <section id="home" className="relative pt-44 pb-20 px-6 overflow-hidden">
         <div className="container mx-auto max-w-5xl text-center">
-          <div className={`inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full text-sm font-bold border transition-colors ${
-            isDarkMode ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-blue-50 text-blue-600 border-blue-100'
-          }`}>
+          <div className={`inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full text-sm font-bold border ${isDarkMode ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
             Disponível para novos projetos
           </div>
-          <h1 className="text-5xl md:text-7xl font-black mb-8 leading-tight">
-            Desenvolvendo Soluções com <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-400 to-emerald-500">
-              Inovação e Performance.
-            </span>
+          <h1 className="text-4xl md:text-7xl font-black mb-8 leading-tight">
+            Desenvolvendo Soluções com <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500">Inovação e Performance.</span>
           </h1>
-          <p className={`max-w-2xl mx-auto text-lg md:text-xl mb-12 leading-relaxed ${
-            isDarkMode ? 'text-slate-400' : 'text-slate-600'
-          }`}>
-            Olá, eu sou o Welinton. Sou um Desenvolvedor apaixonado por criar experiências digitais memoráveis e interfaces de alta performance.
+          <p className={`max-w-2xl mx-auto text-lg md:text-xl mb-12 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            Olá, eu sou o Welinton. Sou um Programador apaixonado por criar experiências digitais memoráveis.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button 
-              onClick={() => scrollToSection('contact')} 
-              className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-600/30 transition-all active:scale-95 flex items-center justify-center gap-2"
-            >
-              Vamos conversar <MessageCircle size={18} />
+            <button onClick={() => scrollToSection('contact')} className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-600/30 transition-all active:scale-95">
+              Vamos conversar
             </button>
-            <button 
-              onClick={() => scrollToSection('projects')} 
-              className={`px-8 py-4 rounded-2xl font-bold border transition-all active:scale-95 ${
-                isDarkMode ? 'border-slate-800 hover:bg-slate-900' : 'border-slate-200 hover:bg-white shadow-sm'
-              }`}
-            >
+            <button onClick={() => scrollToSection('projects')} className={`px-8 py-4 rounded-2xl font-bold border transition-all active:scale-95 ${isDarkMode ? 'border-slate-800 hover:bg-slate-900' : 'border-slate-200 hover:bg-slate-50'}`}>
               Ver Projetos
             </button>
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className={`py-24 px-6 transition-colors duration-500 ${
-        isDarkMode ? 'bg-slate-900/40' : 'bg-white'
-      }`}>
+      {/* Skills */}
+      <section id="skills" className={`py-24 px-6 ${isDarkMode ? 'bg-slate-900/40' : 'bg-slate-100/30'}`}>
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Minhas Habilidades</h2>
-            <div className="h-1.5 w-16 bg-blue-600 mx-auto rounded-full mb-4"></div>
-            <p className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>As tecnologias que fazem parte do meu dia a dia.</p>
+            <div className="h-1.5 w-16 bg-blue-600 mx-auto rounded-full"></div>
           </div>
-          
           <div className="grid md:grid-cols-3 gap-8">
             {skillCategories.map((cat, i) => (
-              <div key={i} className={`p-8 rounded-3xl border transition-all hover:-translate-y-2 group ${
-                isDarkMode 
-                  ? 'border-slate-800 bg-slate-900/50 hover:border-blue-500/50 shadow-xl shadow-black/20' 
-                  : 'border-slate-100 bg-white shadow-lg hover:shadow-2xl shadow-slate-200/50 hover:border-blue-200'
-              }`}>
-                <div className={`mb-6 p-4 inline-block rounded-2xl transition-colors ${
-                  isDarkMode ? 'bg-slate-800 group-hover:bg-slate-700' : 'bg-blue-50 group-hover:bg-blue-100'
-                }`}>{cat.icon}</div>
+              <div key={i} className={`p-8 rounded-3xl border transition-all hover:-translate-y-2 ${isDarkMode ? 'border-slate-800 bg-slate-900/50' : 'border-slate-100 bg-white shadow-sm hover:shadow-xl'}`}>
+                <div className="mb-6 p-3 inline-block rounded-2xl bg-blue-500/10">{cat.icon}</div>
                 <h3 className="text-xl font-bold mb-6">{cat.title}</h3>
                 <div className="flex flex-wrap gap-2">
                   {cat.skills.map(s => (
-                    <span key={s} className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors ${
-                      isDarkMode 
-                        ? 'bg-slate-800 text-slate-300 group-hover:bg-slate-700' 
-                        : 'bg-slate-100 text-slate-600 group-hover:bg-slate-200'
-                    }`}>
+                    <span key={s} className={`px-3 py-1.5 rounded-xl text-xs font-bold ${isDarkMode ? 'bg-slate-800 text-slate-300' : 'bg-slate-100 text-slate-600'}`}>
                       {s}
                     </span>
                   ))}
@@ -262,61 +215,47 @@ const App = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* Projects */}
       <section id="projects" className="py-24 px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-            <div className="text-left">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Meus Projetos</h2>
-              <p className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>Clique para ver o resultado final de cada trabalho.</p>
-            </div>
-            <a 
-              href="https://github.com/Welintondev" 
-              target="_blank" 
-              className="flex items-center gap-2 text-blue-600 font-bold hover:underline group"
-            >
-              Ver GitHub <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+          <div className="text-left mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Meus Projetos</h2>
+            <p className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>Dê uma olhada nos meus trabalhos mais recentes.</p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
+          <div className="grid md:grid-cols-2 gap-8">
             {projects.map((p, i) => (
-              <div key={i} className={`group rounded-[2.5rem] overflow-hidden border transition-all duration-500 ${
-                isDarkMode 
-                  ? 'border-slate-800 bg-slate-900/40 hover:border-blue-500/30 shadow-2xl shadow-black/40' 
-                  : 'border-slate-100 bg-white hover:shadow-2xl hover:border-blue-100'
-              }`}>
-                <div className="relative h-64 md:h-80 overflow-hidden">
+              <div key={i} className={`group flex flex-col rounded-[2.5rem] overflow-hidden border transition-all ${isDarkMode ? 'border-slate-800 bg-slate-900/40' : 'border-slate-200 bg-white hover:shadow-2xl'}`}>
+                <div className="relative h-64 overflow-hidden bg-slate-200">
                   <img 
                     src={p.image} 
                     alt={p.title} 
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                    onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" }}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    onError={(e) => {
+                      e.target.onerror = null; 
+                      e.target.src = `https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80`;
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-8">
-                    <a 
-                      href={p.link} 
-                      target="_blank" 
-                      className="text-white text-base font-bold flex items-center gap-3 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-2xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500"
-                    >
+                  {/* Overlay Desktop */}
+                  <div className="absolute inset-0 bg-slate-950/60 hidden md:flex opacity-0 group-hover:opacity-100 transition-opacity items-center justify-center p-8">
+                    <a href={p.link} target="_blank" className="text-white text-sm font-bold flex items-center gap-2 bg-blue-600 px-8 py-4 rounded-2xl hover:bg-blue-700 transition-all transform translate-y-4 group-hover:translate-y-0">
                       Visualizar Site <ExternalLink size={18} />
                     </a>
                   </div>
                 </div>
-                <div className="p-10">
-                  <div className="flex flex-wrap gap-3 mb-6">
-                    {p.tech.map(t => (
-                      <span key={t} className="text-[11px] uppercase font-black tracking-wider text-blue-500 bg-blue-500/10 px-3 py-1 rounded-lg">
-                        {t}
-                      </span>
-                    ))}
+
+                <div className="p-8 flex-1 flex flex-col">
+                  <div className="flex gap-2 mb-4">
+                    {p.tech.map(t => <span key={t} className="text-[10px] uppercase font-extrabold text-blue-500">{t}</span>)}
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 group-hover:text-blue-600 transition-colors">{p.title}</h3>
-                  <p className={`text-base leading-relaxed mb-6 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-600'
-                  }`}>
-                    {p.description}
-                  </p>
+                  <h3 className="text-2xl font-bold mb-3">{p.title}</h3>
+                  <p className={`leading-relaxed mb-6 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{p.description}</p>
+                  
+                  {/* Botão Mobile */}
+                  <div className="mt-auto md:hidden">
+                    <a href={p.link} target="_blank" className="w-full text-white text-sm font-bold flex items-center justify-center gap-2 bg-blue-600 px-6 py-4 rounded-2xl hover:bg-blue-700 active:scale-95 transition-all">
+                      Visualizar Site <ExternalLink size={18} />
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -324,67 +263,34 @@ const App = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact */}
       <section id="contact" className="py-24 px-6">
-        <div className={`container mx-auto max-w-5xl rounded-[3.5rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl transition-all duration-500 ${
-          isDarkMode ? 'bg-slate-900 border border-slate-800' : 'bg-blue-600 text-white'
-        }`}>
-          {/* Círculos decorativos */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-          
+        <div className={`container mx-auto max-w-5xl rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden transition-all ${isDarkMode ? 'bg-slate-900 text-white' : 'bg-blue-600 text-white shadow-2xl shadow-blue-200'}`}>
           <div className="relative z-10">
-            <h2 className={`text-4xl md:text-6xl font-black mb-6 ${isDarkMode ? 'text-white' : 'text-white'}`}>
-              Bora criar algo novo?
-            </h2>
-            <p className={`text-lg mb-12 opacity-80 max-w-xl mx-auto ${isDarkMode ? 'text-slate-300' : 'text-blue-100'}`}>
-              Estou sempre em busca de novos desafios e parcerias. Sinta-se à vontade para me chamar em qualquer rede!
-            </p>
-            
+            <h2 className="text-4xl md:text-6xl font-black mb-6">Bora criar algo novo?</h2>
             <div className="flex flex-wrap justify-center gap-6 mb-12">
               {socialLinks.map((s, i) => (
                 <a 
                   key={i} 
                   href={s.url} 
                   target="_blank" 
-                  className={`w-16 h-16 flex items-center justify-center rounded-[1.25rem] transition-all hover:scale-110 hover:-translate-y-1 shadow-xl ${
-                    isDarkMode ? 'bg-slate-800 text-white' : 'bg-white/10 text-white'
-                  } ${s.color}`}
+                  className={`w-14 h-14 flex items-center justify-center rounded-2xl bg-white/10 text-white transition-all hover:scale-110 ${s.color}`}
                   title={s.name}
                 >
                   {s.icon}
                 </a>
               ))}
             </div>
-            
-            <a 
-              href="mailto:contato@welinton.dev" 
-              className={`inline-block px-12 py-5 rounded-2xl font-bold text-lg transition-all transform hover:scale-105 active:scale-95 ${
-                isDarkMode 
-                  ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/30' 
-                  : 'bg-white text-blue-600 hover:bg-blue-50 shadow-lg shadow-black/10'
-              }`}
-            >
+            <a href="mailto:contato@welinton.dev" className={`inline-block px-12 py-5 rounded-2xl font-bold text-lg hover:shadow-lg transition-all ${isDarkMode ? 'bg-blue-600 text-white' : 'bg-white text-blue-600 hover:bg-blue-50'}`}>
               Enviar Email
             </a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className={`py-16 border-t text-center transition-colors duration-500 ${
-        isDarkMode ? 'border-slate-900 bg-slate-950/50 text-slate-500' : 'border-slate-100 bg-slate-50 text-slate-400'
-      }`}>
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-center gap-2 mb-6">
-             <Terminal className="w-5 h-5 text-blue-600" />
-             <span className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Welinton<span className="text-blue-600">.dev</span></span>
-          </div>
-          <p className="font-bold mb-2">© 2026 Welinton dev. Todos os direitos reservados.</p>
-          <p className="text-xs uppercase tracking-widest font-semibold opacity-60">
-            Construído com React • Tailwind CSS • Lucide Icons
-          </p>
-        </div>
+      <footer className={`py-12 border-t text-center ${isDarkMode ? 'border-slate-900 text-slate-500' : 'border-slate-100 text-slate-400'}`}>
+        <p className="font-bold mb-2">© 2026 Welinton dev. Todos os direitos reservados.</p>
+        <p className="text-xs">Feito com React & Tailwind</p>
       </footer>
     </div>
   );
