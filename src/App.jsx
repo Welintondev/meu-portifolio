@@ -40,14 +40,14 @@ const App = () => {
     },
     {
       title: "Smile Odonto",
-      description: "Landing page para clínica dentária com design moderno e foco em conversão.",
+      description: "Landing page para clínica odontológica com design moderno e foco em conversão.",
       tech: ["HTML5", "CSS3", "Tailwind CSS"],
       link: "https://landingpage-odonto.vercel.app/",
       image: "./img/smile_odonto.png"
     },
     {
       title: "Minhas Finanças",
-      description: "Aplicação web para controlo financeiro pessoal e visualização de gráficos.",
+      description: "Aplicação web para controle financeiro pessoal e visualização de gráficos.",
       tech: ["HTML5", "Tailwind CSS", "JavaScript"],
       link: "https://minhas-financas-khaki.vercel.app/",
       image: "./img/minhas_financas.png"
@@ -123,7 +123,7 @@ const App = () => {
                   activeTab === id ? 'text-blue-600' : (isDarkMode ? 'text-slate-400' : 'text-slate-600')
                 }`}
               >
-                {id === 'home' ? 'Início' : id === 'skills' ? 'Habilidades' : id === 'projects' ? 'Projetos' : 'Contacto'}
+                {id === 'home' ? 'Início' : id === 'skills' ? 'Habilidades' : id === 'projects' ? 'Projetos' : 'Contato'}
                 <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full ${activeTab === id ? 'w-full' : ''}`}></span>
               </button>
             ))}
