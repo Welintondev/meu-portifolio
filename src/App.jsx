@@ -29,7 +29,7 @@ const App = () => {
       title: "Meu Portfólio",
       description: "Site pessoal para apresentar meus projetos, habilidades e experiências como desenvolvedor, com design moderno e responsivo.",
       tech: ["React", "Vite", "Tailwind CSS", "JavaScript", "Lucide React"],
-      link: "https://landingpage-odonto.vercel.app/",
+      link: "https://meu-portifolio-1-pi.vercel.app/",
       image: "/img/meu_portifolio.png"
     },
     {
